@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.envers.Audited;
 
 
-@Table(schema = "RBAC", name = "Localidad")
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -13,13 +13,12 @@ import org.hibernate.envers.Audited;
 @Builder
 @Entity
 @Audited
-public class Localidad {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Localidad extends Base {
+
     private String denominacion;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+   /* @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "fk_domicilio")
     private Domicilio domicilio;
+    */
 }

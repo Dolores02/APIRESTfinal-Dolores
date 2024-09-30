@@ -1,9 +1,9 @@
 package com.example.inicial1.entities.audit;
 
 
+import com.example.inicial1.config.CustomRevisionListener;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.example.inicial1.config.CustomRevisionListener;
 import org.hibernate.envers.RevisionEntity;
 import org.hibernate.envers.RevisionNumber;
 import org.hibernate.envers.RevisionTimestamp;

@@ -4,29 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
-import java.util.Set;
-
 @Entity
-@Table(schema = "RBAC", name = "Domicilio")
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString(exclude = {"persona", "localidades"})
+@ToString
 @Builder
 @Audited
-public class Domicilio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Domicilio extends Base {
+
     private String calle;
     private int numero;
 
-    @OneToOne(mappedBy = "domicilio")
-    private Persona persona;  //bi
+    @OneToOne
+    private Persona persona;
 
-
-    @OneToMany(mappedBy = "domicilio")
-    private Set<Localidad> localidades;  //bi
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_localidad")
+    private Localidad  localidad;
 
 }

@@ -1,7 +1,10 @@
 package com.example.inicial1.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Table(schema = "RBAC", name = "Libro")
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -17,22 +20,17 @@ import java.util.List;
 @Builder
 @Entity
 @Audited
-public class Libro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Libro extends Base {
+
     private String titulo;
     private Date fecha;
     private String genero;
     private int paginas;
     private String autor;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_persona")
-    private Persona persona;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "libro")
-    private List<Autor> autores = new ArrayList<>();   //bi
+    @ManyToMany(cascade = CascadeType.REFRESH) //cambio en autor se actualiza en libro
+    private List<Autor> autores = new ArrayList<>();   //muchos
 
 }
